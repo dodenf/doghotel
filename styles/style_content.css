@@ -1,6 +1,22 @@
 .conteiner{
-    display: flex;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box_wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title_ex{
+    margin-top: 60px;
+    margin-bottom: 30px;
+    color: black;
+    font-size: 14pt;
+    font-family: monospace;
+    text-align: center;
 }
 
 .box{
@@ -23,20 +39,11 @@
 
 /* нижняя часть */
 .ground{
-    background-color:  rgb(249 244 50);
     width: 100%;
     height: 42px;
     align-self: flex-end;
-    display: flex;
-    flex-wrap: wrap;
+    background: repeating-linear-gradient(90deg, rgb(249 244 50), rgb(249 244 50) 13px, rgb(225 173 37) 12px, rgb(225 173 37) 25px);
     
-}
-
-.dark_ground{
-    background-color: rgb(225 173 37);
-    width: 10px;
-    height: 42px;
-    margin-left: 17px;
 }
 
 .oval{
@@ -153,21 +160,22 @@
 
 .seaweed1{
     position: absolute;
-    width: 206px;
-    height: 127px;
+    width: 96%;
+    height: 60%;
     background-color: transparent;
     border: 12px solid #64e527;
     border-bottom: 0;
     border-right: 0;
     border-left: 0;
-    top: 34px;
-    left: 0px;
+    top: 18%;
+    left: 0;
     transform: rotate(288deg);
     border-radius: 100%;
     z-index: -4;
 }
 
 .seaweed2{
+    
     position: absolute;
     width: 178px;
     height: 97px;
@@ -303,4 +311,11 @@
     left: 106px;
     transform: rotate(90deg);
 }
+
+#next_button{
+    align-self: flex-end;
+    margin-right: 40px;
+}
+
+
 

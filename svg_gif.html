@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/svg_pr.css" />
+    <link rel="stylesheet" href="styles/header_footer.css" />
+    <title>Вариант 2</title>
+</head>
+<body>
+  <header class="header_wrapper">
+    <div class="logo_wrap">
+        <img src="styles/images/logo.svg" width="50px" height="50px"/>
+        <a href="index.html" class="logo">Dog Hotel</a>
+    </div>
+    
+    <nav>
+        <div class="wrap_a">
+            <a href="index.html">Services</a>
+            <div class="underline"></div>
+        </div>
+        <div class="wrap_a">
+            <a href="content.html">Content</a>
+            <div class="underline"></div>
+        </div>
+        <div class="wrap_a">
+            <a>Feedback</a>
+            <div class="underline"></div>
+        </div>
+        <div class="wrap_a">
+            <a href="about_us.html">About us</a>
+            <div class="underline"></div>
+        </div>
+    </nav>
+</header>
+
+  <div class="conteiner">
+    <div class="title_ex">Задание 3. Flexbox-бренд. 2023</div>
+    <div class="box" id="btn" onclick="show_img()">
+      <svg class="svg" viewBox="0 0 100 100">
+        <!-- И -->
+        <path
+          id="letter_I"
+          stroke="black"
+          d="M 50,10 h 10 v 30 l 17 -30
+          h 10 v 50 h -10 v -30 l -17 30
+          h -10 v -50 z">
+          <animateMotion begin="btn.click" end="btn.click"
+          fill="freeze" dur="1s"
+          path="M 0, 0 l 10, -10"
+          repeatCount="1" restart="whenNotActive"/>
+  
+        </path>
+        <!-- Д -->
+        
+        <path
+          class="letter_D"
+          id="out_letter_D"
+          stroke="black"
+          d="M 20,40 h 25 v 35 h 10
+          v 15 h -10 v -10 h -30 l 5, 10
+          h -10 l -7.5, -15 
+          c 10 0 18 -5 18 -35 ">
+          <animateMotion begin="btn.click" end="btn.click"
+          fill="freeze" dur="1s"
+          path="M 0, 0 l -10, 10"
+          repeatCount="1" restart="whenNotActive"/>
+        </path>
+        <path
+          class="letter_D"
+          id="in_letter_D"
+          stroke="black"
+          d="
+          M 27, 48 h 10 
+          v 27 h -19 
+          c 6 0 10 -20 9 -27 z">
+          <animateMotion begin="btn.click" end="btn.click"
+          fill="freeze" dur="1s"
+          path="M 0, 0 l -10, 10"
+          repeatCount="1" restart="whenNotActive"/>
+        </path>
+        <!-- примитивный объект -->
+        <circle r="3" id="object" fill="rgb(250, 247, 105)">
+          <animateMotion begin="out_letter_D.mouseover" dur="6s" 
+                        repeatCount="1" restart="whenNotActive"
+                        fill="freeze">
+            <mpath xlink:href="#out_letter_D"/>
+          </animateMotion>
+        </circle>
+      </svg>
+      <img src="styles/images/sticker.png" id="img"/>
+      <div id="name">
+        <p>Имайкина Дарья</p>
+      </div>
+    </div>
+    <a class="title_ex" id="prev_button" href="js_task.html">&lt;- Задание 2.</a>
+  </div>
+  <footer>
+    <div class="footer">
+        <div class="wrap_footer">
+            <div class="footer_title">Our adresses</div>
+            <div class="footer_text">
+                <ul id="addresses">
+                    <li>Labutina, 8, Saint Petersburg</li>
+                    <li>Belova, 7, Saint Petersburg</li>
+                    <li>Sertolo, 9, Saint Petersburg</li>
+                    <li>Fontalovskaya, 13, Saint Petersburg</li>
+                    <li>Neresta, 57, Saint Petersburg</li>
+                    <li>Mira, 18, Saint Petersburg</li>
+                    <li>KIM, 83, Saint Petersburg</li>
+                    <li>Kurova, 9, Saint Petersburg</li>
+                    <li>Gorodovaya, 83, Saint Petersburg</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="wrap_footer">
+            <div class="footer_title">Contacts</div>
+            <div class="footer_text">
+                <ul id="contacts">
+                    <li>Main: +79993450011</li>
+                    <li>Support: +79993450012</li>
+                    <li>AA: +79993450013</li>
+                    <li>BB: +79993450014</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="wrap_footer">
+            <div class="footer_title">Social media</div>
+            <div class="footer_text">
+                <ul id="social_media">
+                    <li>tg: @dog_hotel</li>
+                    <li>inst: @dog_hotel</li>
+                    <li>youtube: @dog_hotel</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer_bottom">
+        <a href="#">© 2018-2023 Dog Hotel</a>
+        <a href="#">User agreement</a>
+        <a href="#">Terms of return</a>
+        <a href="#">Requisites</a>
+        <a href="#">Privacy policy</a>
+    </div>
+</footer>
+  <script type="text/javascript">
+    function show_img(){
+      document.getElementById("img").style.opacity = 1;
+      document.getElementById("name").style.opacity = 1;
+      document.documentElement.style.cssText = "--back_color: rgb(255, 118, 164)";
+      document.documentElement.style.cssText = "--letter_color: rgb(255, 255, 255)";
+      document.getElementById("btn").animation ='wiggle 3s forwards';
+    }
+  </script>
+</body>
+</html>
