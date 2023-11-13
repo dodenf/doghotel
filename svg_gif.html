@@ -36,8 +36,10 @@
 
   <div class="conteiner">
     <div class="title_ex">Задание 3. Flexbox-бренд. 2023</div>
+    
     <div class="box" id="btn" onclick="show_img()">
       <svg class="svg" viewBox="0 0 100 100">
+        <g id="letters">
         <!-- И -->
         <path
           id="letter_I"
@@ -87,14 +89,17 @@
             <mpath xlink:href="#out_letter_D"/>
           </animateMotion>
         </circle>
+        </g>
       </svg>
       <img src="styles/images/sticker.png" id="img"/>
       <div id="name">
         <p>Имайкина Дарья</p>
       </div>
     </div>
+    
     <a class="title_ex" id="prev_button" href="js_task.html">&lt;- Задание 2.</a>
   </div>
+  
   <footer>
     <div class="footer">
         <div class="wrap_footer">
@@ -147,11 +152,13 @@
 </footer>
   <script type="text/javascript">
     function show_img(){
+      
       document.getElementById("img").style.opacity = 1;
       document.getElementById("name").style.opacity = 1;
       document.documentElement.style.cssText = "--back_color: rgb(255, 118, 164)";
       document.documentElement.style.cssText = "--letter_color: rgb(255, 255, 255)";
       document.getElementById("btn").animation ='wiggle 3s forwards';
+      document.getElementById("object").style.display = "none";
     }
   </script>
 </body>
