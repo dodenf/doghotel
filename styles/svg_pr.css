@@ -20,11 +20,6 @@
     text-align: center;
 }
 
-#prev_button{
-    align-self: flex-start;
-    margin-right: 40px;
-}
-
 .box{
     width: 200px;
     height: 200px;

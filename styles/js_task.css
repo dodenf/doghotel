@@ -31,14 +31,3 @@
 #formula{
     margin: 50px;
 }
-
-.prev_next{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.prev_next a{
-    color: black;
-    margin: 40px
-}

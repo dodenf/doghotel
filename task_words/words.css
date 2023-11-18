@@ -1,0 +1,9 @@
+
+.content{
+    display: grid;
+}
+
+.content div {
+    margin: 5px;
+    background: rgb(212, 136, 136);
+}

@@ -1,11 +1,12 @@
 import { menuButtonListener} from "./questList.js";
-
-start();
+import { questions } from "./questions.js";
 
 const red = '#d32727';
 const green = '#2fb62f';
-
+const speed = 2; // скорость смены ответов (в секундах)
 var testResults; // итоги 
+
+start();
 
 // начальное меню
 function start(){
@@ -32,7 +33,11 @@ function end(quests){
         `<div class="conteiner"><h1>Вопросы закончились</h1></div>`
     );
     // результаты
-    setTimeout(()=>{
+    setTimeout(()=>{ setResults(quests) }, speed*1000);
+}
+
+// вывод результатов
+function setResults(quests){
     const conteiner = document.querySelector(".conteiner");
     conteiner.remove();
     document.querySelector("body").insertAdjacentHTML(
@@ -45,14 +50,18 @@ function end(quests){
             ${setQuestionRes(quests)}
         </div>`
     );
+    // по клику выводится правильный ответ
+    let lastClickebButton = document.querySelector('.correctAnsw');
     document.querySelectorAll('.questionTitle').forEach(element => {
-        console.log(element.firstChild)
+        let elementChild = element.childNodes[1];
+        elementChild.style.display = 'none';
         element.addEventListener('click', () => {
-            element.firstChild.style = 'display: none';
-        })
+            
+            elementChild.style.display = elementChild.style.display == 'none'? 'block' : 'none';
+            lastClickebButton.style.display = 'none';
+            lastClickebButton = elementChild;
+        });
     });
-    }, 1000);
-    
 }
 
 function setQuestionRes(quest){
@@ -65,34 +74,37 @@ function setQuestionRes(quest){
     ).join('');
 }
 
-// загрузка вопросов
-export function runTest(quests, numQuestion){
+// загрузка вопроса из списка
+export function runQuestion(quests, numQuestion){
     setQuestion(quests[numQuestion]);
     answerEventListener(quests, numQuestion);
 }
 
 // возврат в меню
-document.querySelector('.toHome').addEventListener('click', function() { start(); });
+document.querySelector('.back').addEventListener('click', start);
 
 // при нажатии на ответ
 function answerEventListener(quests, numQuestion) { 
     document.querySelectorAll('.answer').forEach(element => {
+        // событие при нажатии на ответ
         element.addEventListener('click', function() {
-            colorClickAnswer();
+            changeColorOnClickAnswer();
             document.querySelectorAll('.answer').forEach(element => {element.classList.remove('button')});
             // обработка результата
-            disappearance(document.querySelectorAll('.wrongAnswer')); // исчезновение неправильных ответов
+            animateWrongAnswers(document.querySelectorAll('.wrongAnswer')); // исчезновение неправильных ответов
+            // обработка нажатия на неправильный ответ
             if (element.classList.contains('wrongAnswer')){ 
                 testResults.push(false);
                 // увеличение правильного ответа
                 document.querySelector('.correctAnswer').style.position = 'absolute';
-                document.querySelector('.correctAnswer').style.animation = 'increase 2s linear';
+                document.querySelector('.correctAnswer').style.animation = `increase ${speed}s linear`;
 
                 document.querySelector('h1').insertAdjacentHTML(
                     'afterend', `<h style="color: ${red};">✖</h>`
                 );
             }
-            if (element.classList.contains('correctAnswer')){ 
+            // обработка нажатия на правильный ответ
+            else if (element.classList.contains('correctAnswer')){ 
                 testResults.push(true);
                 setCommentToCorrectAnsw(quests[numQuestion]); // добавление комментария
                 document.querySelector('h1').insertAdjacentHTML(
@@ -100,21 +112,23 @@ function answerEventListener(quests, numQuestion) {
                 );
             }
             if (numQuestion < quests.length-1){
-                setTimeout(() => { runTest(quests, numQuestion+1);}, 2000);
+                setTimeout(() => { runQuestion(quests, numQuestion+1);}, speed*1000);
             }
             else{
-                setTimeout(() => {end(quests);}, 1000);
+                setTimeout(() => {end(quests);}, speed*1000);
             }
         });
     });
 }
 
-function disappearance(elements){
+// анимация неправильных ответов
+function animateWrongAnswers(elements){
     elements.forEach(element => {
-        element.style.animation = 'disappearance 2s linear';
+        element.style.animation = `disappearance ${speed}s linear`;
     });
 }
 
+// добавляет комментарий к правильному ответу
 function setCommentToCorrectAnsw(question){
     document.querySelector('.correctAnswer').insertAdjacentHTML(
         'beforeend',
@@ -122,7 +136,8 @@ function setCommentToCorrectAnsw(question){
     )
 }
 
-function colorClickAnswer(){
+// меняет цвет ответа после нажатия
+function changeColorOnClickAnswer(){
     document.querySelectorAll('.wrongAnswer').forEach(item => {
         item.style.background = red;
     });
@@ -131,6 +146,7 @@ function colorClickAnswer(){
     });
 }
 
+// размещает вопрос
 function setQuestion(question){
     document.querySelector(".conteiner").remove();
     document.querySelector("body").insertAdjacentHTML(
@@ -141,19 +157,21 @@ function setQuestion(question){
             </div>
             <div class="questWrap">
                 <p class="questionTitle"> ${question.quest} </p>
-                <div class="wrap-answers"> ${setAnswers(getRandOrderArray(question.answers))} </div>
+                <div class="wrap-answers"> ${setAnswers(shuffleArray(question.answers))} </div>
             </div>
         </div>`
     );
-} // размещает вопрос
+}
 
+// оборачивает каждый вопрос в тег button
 function setAnswers(answers) {
     return answers.map(
         (answer) => `<button type="button" class="button answer ${answer[1]}"> ${answer[0]} </button>`
     ).join('');
-} // оборачивает каждый вопрос в тег button
+}
 
-export function getRandOrderArray(items){
+// возвращает массив с элементами в случайном порядке
+export function shuffleArray(items){
     let randOrderArr = items;
     let rnd;
     let len = items.length-1;
@@ -164,9 +182,10 @@ export function getRandOrderArray(items){
         randOrderArr[rnd] = tempItem;
     }
     return randOrderArr;
-} // возвращает массив с элементами в случайном порядке
+}
 
-function randomIntFromInterval(min, max) { // min и max включены
+// min и max включены
+function randomIntFromInterval(min, max) { 
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
