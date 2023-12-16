@@ -4,7 +4,7 @@ console.log(localStorage);
 
 const count_items = [10, 15, 20];
 const count_tasks = 10;
-const time_wait = 5;
+const time_wait = 1000;
 
 let currentTask = 0;
 let countAnsw = 0;

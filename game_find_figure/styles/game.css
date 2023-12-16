@@ -27,7 +27,7 @@ body{
 
 .task_tracking{
     height: 17px;
-    margin: 0 0 10px 0;
+    margin: 10px 0;
     display: flex;
     justify-content: space-evenly;
 }
@@ -41,7 +41,7 @@ body{
 }
 
 .wrap_task{
-    height: 85%;
+    height: calc(100% - 92px);
     width: clamp(250px, 80%, 1200px);
     background-color: rgba(87, 87, 87, 0.555);
     border-radius: 20pt;
@@ -53,7 +53,7 @@ body{
     height: 25px;
     width: clamp(250px, 80%, 1200px);
     background-color: rgba(87, 87, 87, 0.555);
-    margin: 15px 0 0 0;
+    margin: 15px 0;
 }
 
 .timer_slider{
@@ -100,7 +100,7 @@ button{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: clamp(20px, 14%, 200px);
+    width: clamp(10px, 14%, 200px);
     padding: 15px;
     border-radius: 10pt;
 }
