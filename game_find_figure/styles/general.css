@@ -15,7 +15,7 @@ body{
 }
 
 header{
-    height: calc(8vh - 10px);
+    height: calc(7vh - 10px);
     width: calc(100vw - 20px);
     padding: 10px 10px 0 10px;
     display: flex;
