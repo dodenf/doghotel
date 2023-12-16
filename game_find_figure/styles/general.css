@@ -1,0 +1,40 @@
+:root{
+    --dark_theme_background-color: rgb(48, 48, 48);
+    --light_theme_background-color: rgb(233 233 233);
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(./fonts/Roboto-Regular.ttf);
+}
+
+
+body{
+    margin: 0;
+    overflow: hidden;
+}
+
+header{
+    height: calc(8vh - 10px);
+    width: calc(100vw - 20px);
+    padding: 10px 10px 0 10px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+img{
+    height: 100%;
+    stroke: black;
+}
+
+a{
+    margin: 5px 20px;
+}
+
+.header_button{
+    margin: 5px 20px;
+    background: none;
+    padding: 0;
+    border: 0;
+}
