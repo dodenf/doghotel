@@ -188,19 +188,25 @@ button{
     border-radius: 20pt;
     font-size: clamp(12pt, 30%, 20pt);
     color: inherit;
+    z-index: 20;
 }
 
-/* .conteiner{
-    height: calc(90vh - 20px);
-    width: clamp(250px, 90vw, 1200px);
-    background: rgba(255, 255, 255, 0.096);
-    backdrop-filter: blur(30px);
-    border-radius: 20pt;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
+.wrap_blob{
+    z-index: 4;
+    position: absolute;
+    width: 200px;
+}
 
+.svg_fig{
+    animation: appearance 0.8s ease 1;
+}
+
+@keyframes appearance {
+    0%{ opacity: 0% }
+    25%{ opacity: 100% }
+    75%{ opacity: 100% }
+    100%{ opacity: 0% }
+}
 
 .green{
     fill: rgb(39, 150, 39);

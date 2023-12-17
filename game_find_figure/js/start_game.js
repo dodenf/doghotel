@@ -1,4 +1,4 @@
-import { count_items, count_tasks, time_wait, quest_color, colors, shapes, shapesBoard } from "./consts.js";
+import { count_items, count_tasks, time_wait, quest_color, colors, shapes, shapesBoard, blobs } from "./consts.js";
 
 let currentTask = 0;
 let countAnsw = 0;
@@ -51,7 +51,9 @@ function showRules(level){
         document.querySelector('.timer_slider').style.animationPlayState = 'running';
         document.querySelector('.mask').remove();
         document.querySelector('.wrap_res').remove();
-    })
+    });
+    let res = document.querySelector('.wrap_res');
+    dragNDrop(res);
 }
 
 //генерация задания
@@ -97,10 +99,19 @@ function generate_task(){
     // 3 уровень
     if (level ==  3){
         let timeAni = Math.random()+1;
-        document.querySelectorAll('svg').forEach( elem => {
+        document.querySelectorAll('.svg_fig').forEach( elem => {
             if (random(2)){ elem.style = `animation: spinning ${timeAni}s linear infinite` }
             else { elem.style = `animation: wobble ${timeAni}s linear infinite` }
         });
+
+        document.querySelectorAll('.figure').forEach( elem => { elem.style = 'width: clamp(15px, 6%, 150px)'});
+        setInterval(()=>{
+            document.querySelector('header').insertAdjacentHTML('beforebegin', 
+            `<div class="wrap_blob" style="left: calc(${random(90)}% + 10px); top: calc(${random(70)}% + 20px)"> ${blobs[random(blobs.length)]} </div>`);
+            setTimeout(()=>{
+                document.querySelector('body').firstChild.remove();
+            }, 800);
+        }, 600);
     }
 }
 
@@ -200,7 +211,8 @@ function showRes(){
     }
     userScores[level-1] = +userScores[level-1];
     localStorage.setItem(name, userScores);
-    
+    let res = document.querySelector('.wrap_res');
+    dragNDrop(res);
 }
 
 function processing(item, arrAnswers, generate){
@@ -240,8 +252,35 @@ function setFigures(figures){
 }
 
 function wrapFigure(shape){
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${shapesBoard[shape].w} 300" >
+    return `<svg class="svg_fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${shapesBoard[shape].w} 300" >
         <path d="${shapesBoard[shape].svg}"></path></svg>`;
+}
+
+function dragNDrop(item){
+    item.onmousedown = function (event) {
+        setTimeout(()=>{
+            
+            item.style.position = 'absolute';
+            
+            // перемещение слова при зажатии мыши
+            moveAt(event.pageX, event.pageY);
+            function moveAt(pageX, pageY) {
+                item.style.left = pageX - item.offsetWidth / 2 + 'px';
+                item.style.top = pageY - item.offsetHeight / 2 + 'px';
+            }
+            
+            document.addEventListener('mousemove', onMouseMove);
+            // обработка нажатия
+            item.onmouseup = function() {
+                document.removeEventListener('mousemove', onMouseMove);
+                item.onmouseup = null;
+            };
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+            }
+        }, 100);
+    }
 }
 
 function random(n){
