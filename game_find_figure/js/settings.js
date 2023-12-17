@@ -2,7 +2,7 @@
 document.querySelector("body").insertAdjacentHTML(
     'afterbegin',
     `<header class="header">
-        <a href="index_game.html"><img class="icon_home" src="styles/icons/home.svg" alt="svg"></a>
+        <a href="index.html"><img class="icon_home" src="styles/icons/home.svg" alt="svg"></a>
         <button class="header_button theme_switch" onclick="changeTheme()" type="button"><img src="styles/icons/moon.svg" alt="svg"></button>
     </header>`
 )

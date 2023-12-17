@@ -10,13 +10,17 @@
     flex-direction: column;
 }
 
-.title{
+.title, .user{
     padding: 20px 40px;
     margin: 20px;
     background-color: rgb(128 128 128 / 77%);
     border-radius: 20pt;
     font-family: roboto;
-    font-size: 20pt;
+    font-size: 16pt;
+}
+
+.user{
+    font-size: 12pt;
 }
 
 .wrap_menu{
@@ -82,8 +86,11 @@ a{
 
 /* level selection */
 .level_selection{
+    display: flex;
     flex-wrap: wrap;
-    margin: 0 0 20px 0;
+    margin: 10px;
+    width: 80%;
+    overflow: scroll;
 }
 
 .level{
@@ -104,4 +111,15 @@ button.level:hover{
 
 .locked{
     background: rgba(61, 61, 61, 0.77);
+}
+
+.scroll_stats{
+    height: 100%;
+    overflow: scroll;
+}
+
+.wraper{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
 }

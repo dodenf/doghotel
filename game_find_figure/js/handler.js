@@ -1,5 +1,5 @@
 
-export let userInfo = {};
+let userInfo = {};
 
 let input = document.getElementById("user_name");
 input.addEventListener( 'input',
@@ -17,7 +17,6 @@ startButton.addEventListener('click', (event)=>{
     else { shake_button(); }
 });
 
-
 function shake_button(){
     let startButtonClassList = startButton.classList;
     startButtonClassList.add('shaked');
@@ -32,17 +31,33 @@ function level_selection(){
     conteiner.insertAdjacentHTML('afterbegin',
         `<h class="title">Выберите уровень</h>
         <form class="level_selection" action="./game.html">
-        <button class="level unlocked" value="1">1</button>
-        <button class="level locked" value="2">2</button>
-        <button class="level locked" value="3">3</button>
+            <button class="level unlocked" value="1">1</button>
+            <button class="level locked" value="2">2</button>
+            <button class="level locked" value="3">3</button>
         <form>`
     );
     document.querySelectorAll('.level').forEach((item)=>{
         item.addEventListener('click', ()=>{
-            userInfo.last_selected_level = item.value;
-            localStorage.setItem(`${"userInfo"}`, JSON.stringify(userInfo));
+            localStorage.setItem("last_player", userInfo.name);
+            localStorage.setItem("last_level", item.value);
+            let scores = localStorage.getItem(userInfo.name);
+            if (!scores) { localStorage.setItem(userInfo.name, "") }
         })
     });
+
+    let scores = localStorage.getItem(userInfo.name) || 0;
+    scores = scores.split(',');
+    for (let i = 0; i < scores.length; i++){
+        if (+scores[i] >= 10) {
+            let item = document.querySelector('.level_selection').children[i+1];
+            console.log(item);
+            if (item.classList.contains('locked')){ 
+                item.classList.remove('locked');
+                item.classList.add('unlocked');
+            }
+            
+        }
+    }
 
     document.querySelectorAll('.locked').forEach( item =>{
         item.disabled = 'disabled';

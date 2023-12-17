@@ -96,13 +96,46 @@ button{
     cursor: pointer;
 }
 
+@keyframes spinning{
+    0% {
+        transform:rotate(0deg);
+    }
+    100% {
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes wobble {
+    0% {
+      transform: none;
+    }
+    15% {
+      transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    }  
+    30% {
+      transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    }  
+    45% {
+      transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    }  
+    60% {
+      transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    }  
+    75% {
+      transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    }  
+    100% {
+      transform: none;
+    }
+}
+
 .figure{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: clamp(10px, 14%, 200px);
-    padding: 15px;
-    border-radius: 10pt;
+    padding: 20px;
+    border-radius: 20pt;
+    width: clamp(10px, 10vw, 200px);
 }
 
 .figure:hover{
