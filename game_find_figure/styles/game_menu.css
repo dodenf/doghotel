@@ -22,6 +22,7 @@ html, body{
     border-radius: 20pt;
     font-family: inherit;
     font-size: 16pt;
+    z-index: 10;
 }
 
 .user{
@@ -97,6 +98,7 @@ a{
     margin: 10px;
     width: 80%;
     overflow: scroll;
+    z-index: 10;
 }
 
 .level{
