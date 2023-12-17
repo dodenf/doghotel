@@ -12,6 +12,7 @@ html, body{
 .conteiner{
     height: 94%;
     flex-direction: column;
+    z-index: -1;
 }
 
 .title, .user{
@@ -32,6 +33,7 @@ html, body{
     flex-direction: column;
     width: clamp(250px, 30%, 900px);
     margin: 10px;
+    z-index: 10;
 }
 
 .menu_item{
@@ -128,6 +130,7 @@ button.level:hover{
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.281) transparent;
+    z-index: 10;
 }
 
 /* для Chrome/Edge/Safari */

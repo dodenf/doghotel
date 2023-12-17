@@ -10,33 +10,40 @@ for (let i = 0; i < 15; i++){
 
     if (figure == 'triangle'){
         document.querySelector('body').insertAdjacentHTML('beforeend',
-        `<div class="background_figure triangle ${color}" draggable="true"
-        style="border-left-width: ${a/1.5}vmin; border-right-width: ${a/1.5}vmin; border-bottom-width: ${a}vmin; top: ${top}vh; right: ${right}vw; z-index: -1;"></div>`)
+        `<div class="background_figure triangle ${color}"
+        style="border-left-width: ${a/1.5}vmin; border-right-width: ${a/1.5}vmin; border-bottom-width: ${a}vmin; top: ${top}vh; right: ${right}vw; z-index: 1;"></div>`)
     }
     else{
         document.querySelector('body').insertAdjacentHTML('beforeend',
-        `<div class="background_figure ${figure} ${color} symmetric" draggable="true"
-        style="width: ${a}vmin; height: ${a}vmin; top: ${top}vh; right: ${right}vw; z-index: -1;"></div>`)
+        `<div class="background_figure ${figure} ${color} symmetric"
+        style="width: ${a}vmin; height: ${a}vmin; top: ${top}vh; right: ${right}vw; z-index: 1;"></div>`)
     }
-
 }
 
-// document.querySelectorAll('.background_figure').forEach(item => {
-//     item.addEventListener("mousedown", () => {
-//         item.addEventListener("mousemove", onMouseDrag);
-//     });
-// });
+document.querySelectorAll('.background_figure').forEach(item => {
+    dragNDrop(item);
+});
 
-// document.querySelectorAll('.background_figure').forEach(item => {
-//     item.addEventListener("mouseup", () => {
-//         item.removeEventListener("mousemove", onMouseDrag);
-//     });
-// });
+function dragNDrop(item){
+    item.onmousedown = function (event) {
+        item.style.position = 'absolute';
+            
+        // перемещение слова при зажатии мыши
+        moveAt(event.pageX, event.pageY);
+        function moveAt(pageX, pageY) {
+            item.style.left = pageX - item.offsetWidth / 2 + 'px';
+            item.style.top = pageY - item.offsetHeight / 2 + 'px';
+        }
+        
+        document.addEventListener('mousemove', onMouseMove);
+        // обработка нажатия
+        item.onmouseup = function() {
+            document.removeEventListener('mousemove', onMouseMove);
+            item.onmouseup = null;
+        };
 
-// function onMouseDrag() {
-//     let getContainerStyle = window.getComputedStyle(background_figure);
-//     let leftValue = parseInt(getContainerStyle.left);
-//     let topValue = parseInt(getContainerStyle.top);
-//     container.style.left = `${leftValue + movementX}px`;
-//     container.style.top = `${topValue + movementY}px`;
-// }
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+    }
+}

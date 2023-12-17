@@ -53,7 +53,6 @@ function showRules(level){
         document.querySelector('.wrap_res').remove();
     });
     let res = document.querySelector('.wrap_res');
-    dragNDrop(res);
 }
 
 //генерация задания
@@ -212,7 +211,6 @@ function showRes(){
     userScores[level-1] = +userScores[level-1];
     localStorage.setItem(name, userScores);
     let res = document.querySelector('.wrap_res');
-    dragNDrop(res);
 }
 
 function processing(item, arrAnswers, generate){
@@ -254,33 +252,6 @@ function setFigures(figures){
 function wrapFigure(shape){
     return `<svg class="svg_fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${shapesBoard[shape].w} 300" >
         <path d="${shapesBoard[shape].svg}"></path></svg>`;
-}
-
-function dragNDrop(item){
-    item.onmousedown = function (event) {
-        setTimeout(()=>{
-            
-            item.style.position = 'absolute';
-            
-            // перемещение слова при зажатии мыши
-            moveAt(event.pageX, event.pageY);
-            function moveAt(pageX, pageY) {
-                item.style.left = pageX - item.offsetWidth / 2 + 'px';
-                item.style.top = pageY - item.offsetHeight / 2 + 'px';
-            }
-            
-            document.addEventListener('mousemove', onMouseMove);
-            // обработка нажатия
-            item.onmouseup = function() {
-                document.removeEventListener('mousemove', onMouseMove);
-                item.onmouseup = null;
-            };
-
-            function onMouseMove(event) {
-                moveAt(event.pageX, event.pageY);
-            }
-        }, 100);
-    }
 }
 
 function random(n){
