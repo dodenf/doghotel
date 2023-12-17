@@ -28,6 +28,7 @@ function showInfo(user){
 function getUsers(){
     localStorage.removeItem('last_player');
     localStorage.removeItem('last_level');
+    localStorage.removeItem('theme');
     let arr = [];
     let name;
     for (let i = 0; i < localStorage.length; i++){
@@ -38,8 +39,9 @@ function getUsers(){
 }
 
 function sum(arr){
-    arr = Array(arr);
-    arr.map(item => +item);
+    arr = arr.split(',');
+    arr = arr.map(item => +item);
+    console.log(arr);
     return arr.reduce((partialSum, a) => partialSum + a, 0);
 }
 

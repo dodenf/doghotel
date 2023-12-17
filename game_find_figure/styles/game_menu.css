@@ -4,18 +4,22 @@
     justify-content: center;
     align-items: center;
 }
+html, body{
+    height: 100%;
+    width: 100%;
+}
 
 .conteiner{
-    height: 94vh;
+    height: 94%;
     flex-direction: column;
 }
 
 .title, .user{
     padding: 20px 40px;
     margin: 20px;
-    background-color: rgb(128 128 128 / 77%);
+    background: var(--blocks-color);
     border-radius: 20pt;
-    font-family: roboto;
+    font-family: inherit;
     font-size: 16pt;
 }
 
@@ -36,7 +40,7 @@
     margin: 5px;
     border-radius: 20pt;
     border: 0;
-    background: rgb(128 128 128 / 77%);
+    background: var(--blocks-color);
     color: inherit;
     font-size: 14pt;
     box-shadow: 0 5px 10px rgb(82 82 82);
@@ -95,11 +99,11 @@ a{
 
 .level{
     width: clamp(220px, 20%, 500px);
-    height: 25vh;
+    height: 20vh;
     margin: 7px;
     border-radius: 20pt;
     border: 0;
-    background: rgb(128 128 128 / 77%);
+    background: var(--blocks-color);
     color: inherit;
     font-size: 14pt;
     box-shadow: 0 5px 10px rgb(82 82 82);
@@ -113,13 +117,30 @@ button.level:hover{
     background: rgba(61, 61, 61, 0.77);
 }
 
-.scroll_stats{
-    height: 100%;
-    overflow: scroll;
-}
-
 .wraper{
     display: flex;
     flex-wrap: wrap;
     margin: 10px;
 }
+
+.scroll_stats{
+    height: 100%;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.281) transparent;
+}
+
+/* для Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+    height: 0;
+    width: 10px;
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.281);
+    border: 3px solid transparent;
+}
+
+

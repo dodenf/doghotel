@@ -45,17 +45,15 @@ function level_selection(){
         })
     });
 
-    let scores = localStorage.getItem(userInfo.name) || 0;
+    let scores = String(localStorage.getItem(userInfo.name) || 0);
     scores = scores.split(',');
     for (let i = 0; i < scores.length; i++){
-        if (+scores[i] >= 10) {
+        if (+scores[i] >= 10 && i < 2) {
             let item = document.querySelector('.level_selection').children[i+1];
-            console.log(item);
             if (item.classList.contains('locked')){ 
                 item.classList.remove('locked');
                 item.classList.add('unlocked');
             }
-            
         }
     }
 

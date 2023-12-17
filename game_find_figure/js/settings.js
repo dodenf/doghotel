@@ -3,30 +3,39 @@ document.querySelector("body").insertAdjacentHTML(
     'afterbegin',
     `<header class="header">
         <a href="index.html"><img class="icon_home" src="styles/icons/home.svg" alt="svg"></a>
-        <button class="header_button theme_switch" onclick="changeTheme()" type="button"><img src="styles/icons/moon.svg" alt="svg"></button>
+        <button class="header_button theme_switch" onclick="changeTheme()" type="button"></button>
     </header>`
 )
 
 // начальные настройки
-document.querySelector('body').style.backgroundColor = 'var(--dark_theme_background-color)';
-document.querySelector('body').style.color = 'var(--light_theme_background-color)';
+if (localStorage.getItem('theme') == 'dark'){
+    document.querySelector('body').style.backgroundColor = 'var(--dark_theme_background-color)';
+    document.querySelector('body').style.color = 'var(--light_theme_background-color)';
+    document.querySelector('.theme_switch').insertAdjacentHTML( 'afterbegin', `<img src="styles/icons/moon.svg" alt="svg">`);
+}
+else{
+    document.querySelector('body').style.backgroundColor = 'var(--light_theme_background-color)';
+    document.querySelector('body').style.color = 'var(--dark_theme_background-color)';
+    document.querySelector('.theme_switch').insertAdjacentHTML( 'afterbegin', `<img src="styles/icons/sun.svg" alt="svg">`);
+}
 
 function changeTheme(){
-    let currentColor = document.querySelector('body').style;
+    let currentSett = document.querySelector('body').style;
     document.querySelector('.theme_switch').replaceChildren();
-    if (currentColor.backgroundColor == 'var(--dark_theme_background-color)'){
-        document.querySelector('body').style.backgroundColor = 'var(--light_theme_background-color)';
-        document.querySelector('body').style.color = 'var(--dark_theme_background-color)';
+    if (localStorage.getItem('theme')=='dark'){
+        currentSett.backgroundColor = 'var(--light_theme_background-color)';
+        currentSett.color = 'var(--dark_theme_background-color)';
+        document.documentElement.style.cssText = "--blocks-color: rgb(175 175 175 / 77%);";
         //замена иконки
-        document.querySelector('.theme_switch').insertAdjacentHTML( 'afterbegin', `<img src="styles/icons/sun.svg" stroke="yellow" alt="svg">`);
-        document.querySelector('.icon_home').style.stroke = 'var(--dark_theme_background-color)';
+        document.querySelector('.theme_switch').insertAdjacentHTML( 'afterbegin', `<img src="styles/icons/sun.svg" alt="svg">`);
+        localStorage.setItem('theme', 'light');
     }
     else{
-        document.querySelector('body').style.backgroundColor = 'var(--dark_theme_background-color)';
-        document.querySelector('body').style.color = 'var(--light_theme_background-color)';
-
+        currentSett.backgroundColor = 'var(--dark_theme_background-color)';
+        currentSett.color = 'var(--light_theme_background-color)';
+        document.documentElement.style.cssText = "--blocks-color: rgb(128 128 128 / 77%);";
         document.querySelector('.theme_switch').insertAdjacentHTML( 'afterbegin', `<img src="styles/icons/moon.svg" alt="svg">`);
-        // document.querySelector('img').style.stroke = 'var(--light_theme_background-color)';
+        localStorage.setItem('theme', 'dark');
     }
     
 }

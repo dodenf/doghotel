@@ -5,7 +5,12 @@
 
 *{
     font-size: 20pt;
-    font-family: roboto;
+    font-family: comfortaa;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
 }
 
 body{
@@ -17,7 +22,7 @@ body{
 }
 
 .conteiner{
-    height: 93vh;
+    height: 93%;
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -35,7 +40,7 @@ body{
 .task_indicator{
     height: 100%;
     width: 17px;
-    background-color: rgba(87, 87, 87, 0.555);
+    background-color: var(--blocks-color);
     border-radius: 20pt;
     margin: 0 5px;
 }
@@ -43,7 +48,7 @@ body{
 .wrap_task{
     height: calc(100% - 92px);
     width: clamp(250px, 80%, 1200px);
-    background-color: rgba(87, 87, 87, 0.555);
+    background-color: var(--blocks-color);;
     border-radius: 20pt;
     text-align: center;
 }
@@ -80,16 +85,20 @@ body{
 
 .title_quest{
     height: 6%;
-    padding: 20px;
+    padding: 30px 0;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    font-family: inherit;
+    
 }
 
 .items{
-    height: calc(94% - 40px);
+    height: calc(94% - 60px);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-
 }
 
 button{
@@ -135,7 +144,12 @@ button{
     justify-content: center;
     padding: 20px;
     border-radius: 20pt;
-    width: clamp(10px, 10vw, 200px);
+    width: clamp(15px, 8%, 200px);
+}
+
+.minifigure{
+    width: 50px;
+    margin: 0 0 0 20px;
 }
 
 .figure:hover{
@@ -150,7 +164,7 @@ button{
     flex-direction: column;
     z-index: 4; 
     width: clamp(230px, 40%, 900px); 
-    height: 30vh; 
+    padding: 15px; 
     background: #8399a2;
     border-radius: 20pt;
 }
