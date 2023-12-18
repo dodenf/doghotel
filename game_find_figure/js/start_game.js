@@ -25,6 +25,19 @@ if (level == 2){
 else {
     generate_task();
     showRules(level);
+
+    // 3 уровень
+    if (level ==  3){
+        setInterval(()=>{
+            document.querySelector('header').insertAdjacentHTML('beforebegin', 
+            `<div class="wrap_blob" style="left: calc(${random(90)}% + 10px); top: calc(${random(70)}% + 20px)"> ${blobs[random(blobs.length)]} </div>`);
+            setTimeout(()=>{
+                document.querySelector('body').firstChild.remove();
+            }, 4000);
+            document.querySelectorAll('.wrap_blob').forEach(item => {dragNDrop(item)})
+        }, 3000);
+        
+    }
 }
 
 function showRules(level){
@@ -95,22 +108,13 @@ function generate_task(){
         item.addEventListener('click', ()=>{ processing(item, arrAnswers, generate_task) })
     });
 
-    // 3 уровень
-    if (level ==  3){
+    if (level==3){
         let timeAni = Math.random()+1;
         document.querySelectorAll('.svg_fig').forEach( elem => {
             if (random(2)){ elem.style = `animation: spinning ${timeAni}s linear infinite` }
             else { elem.style = `animation: wobble ${timeAni}s linear infinite` }
         });
-
         document.querySelectorAll('.figure').forEach( elem => { elem.style = 'width: clamp(15px, 6%, 150px)'});
-        setInterval(()=>{
-            document.querySelector('header').insertAdjacentHTML('beforebegin', 
-            `<div class="wrap_blob" style="left: calc(${random(90)}% + 10px); top: calc(${random(70)}% + 20px)"> ${blobs[random(blobs.length)]} </div>`);
-            setTimeout(()=>{
-                document.querySelector('body').firstChild.remove();
-            }, 800);
-        }, 600);
     }
 }
 
@@ -269,4 +273,28 @@ function shuffle(items){
         randOrderArr[rnd] = tempItem;
     }
     return randOrderArr;
+}
+
+function dragNDrop(item){
+    item.onmousedown = function (event) {
+        item.style.position = 'absolute';
+            
+        // перемещение слова при зажатии мыши
+        moveAt(event.pageX, event.pageY);
+        function moveAt(pageX, pageY) {
+            item.style.left = pageX - item.offsetWidth / 2 + 'px';
+            item.style.top = pageY - item.offsetHeight / 2 + 'px';
+        }
+        
+        document.addEventListener('mousemove', onMouseMove);
+        // обработка нажатия
+        item.onmouseup = function() {
+            document.removeEventListener('mousemove', onMouseMove);
+            item.onmouseup = null;
+        };
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+    }
 }
